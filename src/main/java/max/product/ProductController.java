@@ -33,9 +33,9 @@ public interface ProductController {
         @RequestParam(required = false) Double max_price
     );
 
-    @PostMapping("/products/{id}/consume")
-    public ResponseEntity<ProductOut> consume(@PathVariable(required = true) String id, @RequestBody(required = true) Integer quantity);
+    @PostMapping("/products/consume")
+    public ResponseEntity<ProductOut> consume(@RequestBody(required = true) StockIn stockIn);
 
-    @PostMapping("/products/{id}/replenish")
-    public ResponseEntity<ProductOut> replenish(@PathVariable(required = true) String id, @RequestBody(required = true) Integer quantity);
+    @PostMapping("/products/replenish")
+    public ResponseEntity<ProductOut> replenish(@RequestBody(required = true) StockIn stockIn);
 }
