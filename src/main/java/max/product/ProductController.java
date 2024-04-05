@@ -1,5 +1,7 @@
 package max.product;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,5 +28,14 @@ public interface ProductController {
     public ResponseEntity<ProductOut> delete(@PathVariable(required = true) String id);
 
     @GetMapping("/products")
-    public ResponseEntity<ProductOut> list(@RequestParam Double min_price, @RequestParam Double max_price);
+    public ResponseEntity<List<ProductOut>> list(
+        @RequestParam(required = false) Double min_price, 
+        @RequestParam(required = false) Double max_price
+    );
+
+    @PostMapping("/products/{id}/consume")
+    public ResponseEntity<ProductOut> consume(@PathVariable(required = true) String id, @RequestBody(required = true) Integer quantity);
+
+    @PostMapping("/products/{id}/replenish")
+    public ResponseEntity<ProductOut> replenish(@PathVariable(required = true) String id, @RequestBody(required = true) Integer quantity);
 }
